@@ -1,17 +1,36 @@
-import { type AppType } from "next/app"
+import type { AppProps } from "next/app"
 import { IntlProvider } from "react-intl"
+import { lazy } from "react"
 
 import { api } from "~/utils/api"
 import { useLocale } from "~/hooks/useLocale"
 
 import "~/styles/globals.css"
+// sanity demo css ⬇️
+import "~/styles/global.css"
 
-const App: AppType = ({ Component, pageProps }) => {
+export interface SharedPageProps {
+  draftMode: boolean
+  token: string
+}
+
+const PreviewProvider = lazy(() => import("~/components/PreviewProvider"))
+
+function App({ Component, pageProps }: AppProps<SharedPageProps>) {
+  const { draftMode, token } = pageProps
   const { locale, messages } = useLocale()
   return (
-    <IntlProvider locale={locale!} messages={messages}>
-      <Component {...pageProps} />
-    </IntlProvider>
+    <>
+      {draftMode ? (
+        <PreviewProvider token={token}>
+          <Component {...pageProps} />
+        </PreviewProvider>
+      ) : (
+        <IntlProvider locale={locale!} messages={messages}>
+          <Component {...pageProps} />
+        </IntlProvider>
+      )}
+    </>
   )
 }
 
