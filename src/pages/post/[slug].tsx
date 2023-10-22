@@ -51,8 +51,12 @@ export default function ProjectSlugRoute(
     slug: props.post.slug.current,
   })
 
+  const translationUrls =
+    post._translations?.map((t) => `/${t.language}/post/${t.slug.current}`) ??
+    []
+
   return (
-    <Layout>
+    <Layout translationUrls={translationUrls}>
       <Container>
         <section className="post">
           {post.mainImage ? (

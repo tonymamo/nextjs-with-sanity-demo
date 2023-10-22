@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from "next/link"
 
 export default function Container({ children }: { children: React.ReactNode }) {
   return (
@@ -11,7 +11,7 @@ export default function Container({ children }: { children: React.ReactNode }) {
       <main>{children}</main>
       <footer className="footer">
         <p className="footer__text">
-          Made with{' '}
+          Made with{" "}
           <svg
             datasanity-icon="heart-filled"
             width="1em"
@@ -26,8 +26,7 @@ export default function Container({ children }: { children: React.ReactNode }) {
               stroke="currentColor"
               strokeWidth="1.2"
             ></path>
-          </svg>{' '}
-          at Sanity
+          </svg>
         </p>
       </footer>
     </div>
