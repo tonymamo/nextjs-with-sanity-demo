@@ -15,6 +15,7 @@ import {
 } from "~/lib/sanity.queries"
 import type { SharedPageProps } from "~/pages/_app"
 import { formatDate } from "~/utils"
+import Layout from "~/components/Layout"
 
 type Query = Record<string, string>
 
@@ -23,9 +24,10 @@ export const getStaticProps: GetStaticProps<
     post: Post
   },
   Query
-> = async ({ draftMode = false, params = {} }) => {
+> = async ({ draftMode = false, params = {}, locale }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
-  const post = await getPost(client, params.slug!)
+  const language = locale ?? "en"
+  const post = await getPost(client, params.slug!, language)
 
   if (!post) {
     return {
@@ -50,29 +52,31 @@ export default function ProjectSlugRoute(
   })
 
   return (
-    <Container>
-      <section className="post">
-        {post.mainImage ? (
-          <Image
-            className="post__cover"
-            src={urlForImage(post.mainImage)!.url()}
-            height={231}
-            width={367}
-            alt=""
-          />
-        ) : (
-          <div className="post__cover--none" />
-        )}
-        <div className="post__container">
-          <h1 className="post__title">{post.title}</h1>
-          <p className="post__excerpt">{post.excerpt}</p>
-          <p className="post__date">{formatDate(post._createdAt)}</p>
-          <div className="post__content">
-            <PortableText value={post.body} />
+    <Layout>
+      <Container>
+        <section className="post">
+          {post.mainImage ? (
+            <Image
+              className="post__cover"
+              src={urlForImage(post.mainImage)!.url()}
+              height={231}
+              width={367}
+              alt=""
+            />
+          ) : (
+            <div className="post__cover--none" />
+          )}
+          <div className="post__container">
+            <h1 className="post__title">{post.title}</h1>
+            <p className="post__excerpt">{post.excerpt}</p>
+            <p className="post__date">{formatDate(post._createdAt)}</p>
+            <div className="post__content">
+              <PortableText value={post.body} />
+            </div>
           </div>
-        </div>
-      </section>
-    </Container>
+        </section>
+      </Container>
+    </Layout>
   )
 }
 

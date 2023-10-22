@@ -11,6 +11,7 @@ import {
   type IframeOptions,
 } from "sanity-plugin-iframe-pane"
 import { previewUrl } from "sanity-plugin-iframe-pane/preview-url"
+import { documentInternationalization } from "@sanity/document-internationalization"
 
 // see https://www.sanity.io/docs/api-versioning for how versioning works
 import {
@@ -32,8 +33,8 @@ const iframeOptions = {
 
 export default defineConfig({
   basePath: "/studio",
-  name: "project-name",
-  title: "Project Name",
+  name: "gocanada",
+  title: "Go Canada",
   projectId,
   dataset,
   //edit schemas in './src/schemas'
@@ -63,5 +64,14 @@ export default defineConfig({
     // Vision lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({ defaultApiVersion: apiVersion }),
+    documentInternationalization({
+      // Required configuration
+      supportedLanguages: [
+        { id: "en", title: "English" },
+        { id: "fr", title: "French" },
+      ],
+      languageField: "language",
+      schemaTypes: ["post"],
+    }),
   ],
 })
