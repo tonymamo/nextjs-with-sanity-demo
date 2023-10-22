@@ -1,0 +1,12 @@
+{
+  "app": {
+    "title": "Aller au Canada",
+    "locale_switcher": {
+      "en": "EN",
+      "fr": "FR"
+    },
+    "main": {
+      "description": "Bienvenue!"
+    }
+  }
+}
