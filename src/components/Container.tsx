@@ -1,11 +1,14 @@
+import { useTranslate } from "~/hooks/useTranslate"
+
 export default function Container({ children }: { children: React.ReactNode }) {
+  const { t } = useTranslate()
   return (
     <div className="container">
       <header className="header"></header>
       <main>{children}</main>
       <footer className="footer">
         <p className="footer__text">
-          Made with{" "}
+          {t("app.main.madeWith")}{" "}
           <svg
             datasanity-icon="heart-filled"
             width="1em"

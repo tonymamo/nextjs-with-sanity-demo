@@ -6,7 +6,8 @@
       "fr": "FR"
     },
     "main": {
-      "description": "Bienvenue!"
+      "description": "Bienvenue!",
+      "madeWith": "Fabriqué avec"
     }
   }
 }
