@@ -12,6 +12,10 @@ const config = {
     defaultLocale: "default",
     localeDetection: false,
   },
+  images: {
+    domains: ["cdn.sanity.io"],
+  },
+
   trailingSlash: true,
 }
 
