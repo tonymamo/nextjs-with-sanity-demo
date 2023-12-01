@@ -17,6 +17,7 @@ export default function Card({ post }: { post: Post }) {
           height={300}
           width={500}
           alt=""
+          priority
         />
       ) : (
         <div className="card__cover--none" />

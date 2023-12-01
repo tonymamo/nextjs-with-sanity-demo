@@ -26,7 +26,10 @@ function App({ Component, pageProps }: AppProps<SharedPageProps>) {
           <Component {...pageProps} />
         </PreviewProvider>
       ) : (
-        <IntlProvider locale={locale!} messages={messages}>
+        <IntlProvider
+          locale={locale === "default" ? "en" : locale!}
+          messages={messages}
+        >
           <Component {...pageProps} />
         </IntlProvider>
       )}
