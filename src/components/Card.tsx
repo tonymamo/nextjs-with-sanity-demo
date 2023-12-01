@@ -1,10 +1,13 @@
 import Image from "next/image"
+import Link from "next/link"
+import { useLocale } from "~/hooks/useLocale"
 
 import { urlForImage } from "~/lib/sanity.image"
 import { type Post } from "~/lib/sanity.queries"
 import { formatDate } from "~/utils"
 
 export default function Card({ post }: { post: Post }) {
+  const { locale } = useLocale()
   return (
     <div className="card">
       {post.mainImage ? (
@@ -20,9 +23,13 @@ export default function Card({ post }: { post: Post }) {
       )}
       <div className="card__container">
         <h3 className="card__title">
-          <a className="card__link" href={`/post/${post.slug.current}`}>
+          <Link
+            className="card__link"
+            href={`/post/${post.slug.current}`}
+            locale={locale}
+          >
             {post.title}
-          </a>
+          </Link>
         </h3>
         <p className="card__excerpt">{post.excerpt}</p>
         <p className="card__date">{formatDate(post._createdAt)}</p>

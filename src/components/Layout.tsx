@@ -2,6 +2,7 @@ import { type Url } from "next/dist/shared/lib/router/router"
 import Link from "next/link"
 import { useLocale } from "~/hooks/useLocale"
 import { useTranslate } from "~/hooks/useTranslate"
+import { Fragment } from "react"
 
 type LayoutProps = {
   translationUrls?: Url[]
@@ -23,17 +24,16 @@ export default function Layout({ children, translationUrls }: LayoutProps) {
             translationUrls.map((translationUrl, index) => {
               const locale = String(translationUrl).split("/")[1]
               return (
-                <>
+                <Fragment key={String(translationUrl)}>
                   <Link
                     locale={locale}
-                    key={String(translationUrl)}
                     href={translationUrl}
                     className="cursor-pointer uppercase"
                   >
                     {locale}
                   </Link>
                   {index === 0 && " / "}
-                </>
+                </Fragment>
               )
             })
           ) : (
